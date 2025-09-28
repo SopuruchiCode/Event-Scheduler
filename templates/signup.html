@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        <input required placeholder="Username" name="username" id="username">
+        <input  required type="email" placeholder="Email" name="email" id="email">
+        <input required placeholder="Password" name="password" id="password">
+        <label for="profile_pic"> Profile Picture</label>
+        <input type="file"  name="profile_pic" id="profile_pic">
+        <input type="submit" placeholder="submit">
+
+    </form>
+    <script>
+        const formElem = document.querySelector("form");
+        const SIGNUP_URL = "http://127.0.0.1:8000/auth/signup"
+
+
+        formElem.addEventListener("submit",  async (e) => {
+            e.preventDefault();
+            const formData = new FormData(formElem);
+            const res = await fetch(SIGNUP_URL, 
+            {
+            method: "post",
+            body: formData,
+            });
+
+            if (res.ok){
+                const result = await res.json();
+                console.log(result);
+            }
+
+        })
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+**/__pycache__/
+.env
+fastapi_environment/
+create mongo db.py
+learning.py
+test.py
+Occupant Info.json
+Room Info.json

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <form method="post">
+        <input id="username" name="username" placeholder="Username">
+        <input id="password" name="password" placeholder="Password">
+        <button type="submit">Sign In</button>
+    </form>
+    <script>
+        const formElem = document.querySelector("form");
+        const LOGIN_URL = "http://127.0.0.1:8000/auth/login";
+
+        formElem.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(formElem);
+            try{
+                const res = await fetch(LOGIN_URL, {
+                method: "post",
+                body: formData,
+                credentials: "include",
+            });
+                if (res.ok){
+                    const access_token = await res.json();
+                    if(access_token["access_token"]){
+                        sessionStorage.setItem("access_token",access_token["access_token"]);
+                        alert("You are logged in!");
+                    }
+                }
+            }catch (err){
+                alert("There was an error",err)
+            }
+
+            
+        //     async function test(){
+        //     try{
+        //         const res = await fetch("http://127.0.0.1:8000/auth/checking-if-logged-in", {
+        //             method: "post",
+        //             headers: {
+        //                 "Authorization": "Bearer " + sessionStorage.getItem("access_token")
+        //             },
+        //             credentials: "include",
+        //         });
+        //             if (res.ok){
+        //                 console.log(res);
+        //             }
+        //         }catch (err){
+        //             alert("There was an error",err)
+        //         }
+        // }
+        // test();
+            
+        })
+        
+    </script>
+</body>
+</html>

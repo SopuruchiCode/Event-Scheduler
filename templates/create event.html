@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        <input type="text" placeholder="name" name="name">
+        <input type="file" placeholder="cover photo" name="cover_photo_file">
+        <input type="text" placeholder="loc" name="location">
+        <input type="date" placeholder="date" name="date">
+        <input type="time" placeholder="date" name="time">
+        <input type="number" placeholder="dur" name="duration">
+        <input type="number" placeholder="capacity" name="capacity">
+        <input type="submit" id="btn"></button>
+    </form>
+
+    <!--
+        name: str
+    creator_id : str
+    location: str
+    date: datetime
+    duration: timedelta
+    capacity: int-->
+    <script>
+        const form = document.querySelector("form");
+        const REFRESH_URL = "http://127.0.0.1:8000/auth/renew-access-token";
+        let access_token = sessionStorage.getItem("access_token");
+        form.addEventListener("submit", async (event)=>{
+            event.preventDefault();
+            const formData = new FormData(form);
+            // const formObj = Object.fromEntries(formData.entries());
+            // console.log(formObj);
+
+            let data = await submit(formData, access_token);
+            if (data["detail"] === "Access token has exired"){
+                access_token = await get_new_access_token();
+
+                if (access_token){
+                    data = await submit(formData, access_token);
+                    alert(JSON.stringify(data));
+                }
+                else{
+                    alert("There was an issue")
+                }
+            }
+            else{
+                alert(JSON.stringify(data));
+            }
+        })
+        async function submit(form, access_token) {
+            let response = await fetch("http://127.0.0.1:8000/create_event/", {
+                method: "post",
+                headers: {
+                    "Authorization": "Bearer " + access_token
+                },
+                body: form,
+            });
+            let data= await response.json();
+            // console.log(response);
+            // console.log(data);
+
+
+            // if(data["detail"] ===  "Access token has exired"){
+            //         get_new_access_token();
+            //         access_token = sessionStorage.getItem("access_token");
+            //     }
+            // alert(JSON.stringify(data));
+            return data;
+        }
+        async function get_new_access_token() {
+            console.log("get_new_access_token was activated")
+            try{
+                const res = await fetch(REFRESH_URL, {
+                    method: "post",
+                    credentials: "include"
+                });
+                const data = await res.json();
+                if (data["access_token"]){
+                    const access_token = data["access_token"];
+                    sessionStorage.setItem("access_token", access_token);
+                    return access_token;
+                }
+                else if(data["detail"] === "Expired Token Error" || "Invalid Token Error" || "Invalid Token Error3"){
+                    alert("You need to login");
+                }
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+    </script>
+</body>
+</html>
