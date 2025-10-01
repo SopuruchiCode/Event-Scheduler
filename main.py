@@ -1,7 +1,7 @@
 from db import client
 from fastapi import UploadFile, File, APIRouter, Request, Depends, HTTPException
 from models import event_model
-from datetime import datetime, timezone
+from datetime import datetime, timezone, time
 from os import path
 from bson import ObjectId
 from fastapi.responses import JSONResponse
@@ -29,6 +29,8 @@ def custom_json_serializer(doc: dict) -> dict:
         elif isinstance(value, datetime):
             doc[key] = value.isoformat()
 
+        elif isinstance(value, time):
+            doc[key] = value.strftime("%H:%M:%S")
     return doc
 
 @router.post("/create_event")
@@ -60,6 +62,7 @@ async def create_event(request: Request, cover_photo_file: UploadFile | None = F
                 await file.write(content)
         
         event["cover-photo"] = filename
+    event["time"] = event["time"].strftime("%H:%M:%S")
     await db.insert_one(event)
     return {"success": "event created successfully"}
 
