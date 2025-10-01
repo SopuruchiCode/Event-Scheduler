@@ -4,9 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data">
+        <div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+        <!-- Title -->
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+        Create an Account
+        </h2>
+
+        <!-- Signup Form -->
+        <form class="space-y-5" autocomplete="off">
+        
+        <!-- Username -->
+        <div>
+            <input required placeholder="Username" name="username" id="username" autocomplete="off"
+            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none" />
+        </div>
+
+        <!-- Email -->
+        <div>
+            <input required type="email" placeholder="Email" name="email" id="email" autocomplete="off"
+            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none" />
+        </div>
+
+        <!-- Password -->
+        <div>
+            <input required type="password" placeholder="Password" name="password" id="password" autocomplete="new-password"
+            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none" />
+        </div>
+
+        <!-- Profile Picture -->
+        <!-- <div>
+            <label for="profile_pic" class="block text-sm font-medium text-gray-700 mb-2">Profile Picture</label>
+            <input type="file" name="profile_pic" id="profile_pic"
+            class="block w-full text-sm text-gray-700 border border-gray-300 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-500" />
+        </div> -->
+        <div>
+        <label for="profile_pic" 
+          class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-blue-500 transition-colors">
+          <div class="flex flex-col items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M7 16V4m0 0L3 8m4-4l4 4m6 0h2a2 2 0 012 2v10a2 2 0 01-2 2H7a2 2 0 01-2-2v-2" />
+            </svg>
+            <p class="text-sm text-gray-600 mt-2">Click to upload profile photo or drag & drop</p>
+          </div>
+          <input type="file" name="profile_pic" id="profile_pic" accept="image/*" class="hidden" />
+        </label class="m-20">
+
+        </div>
+
+        <!-- Submit -->
+        <div>
+            <input type="submit" value="Sign Up"
+            class="w-full py-2 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-colors cursor-pointer" />
+        </div>
+        </form>
+
+        <!-- Footer -->
+        <p class="text-sm text-gray-600 text-center mt-6">
+        Already registered?
+        <a href="#" class="text-green-600 font-medium hover:underline">Login</a>
+        </p>
+    </div>
+</div>  
+    <!-- <form method="post" enctype="multipart/form-data">
         <input required placeholder="Username" name="username" id="username">
         <input  required type="email" placeholder="Email" name="email" id="email">
         <input required placeholder="Password" name="password" id="password">
@@ -14,7 +78,7 @@
         <input type="file"  name="profile_pic" id="profile_pic">
         <input type="submit" placeholder="submit">
 
-    </form>
+    </form> -->
     <script>
         const formElem = document.querySelector("form");
         const SIGNUP_URL = "http://127.0.0.1:8000/auth/signup"
