@@ -4,9 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <form method="post" enctype="multipart/form-data">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <form class="w-full max-w-lg bg-white p-8 rounded-2xl shadow-md space-y-5">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-4">Create Event</h1>
+
+    <!-- Name -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Name</label>
+      <input type="text" placeholder="Event name" name="name" required
+        class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+
+    <!-- Cover Photo -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Cover Photo</label>
+      <input type="file" name="cover_photo_file" 
+        class="mt-1 w-full text-sm text-gray-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
+    </div>
+
+    <!-- Location -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Location</label>
+      <input type="text" placeholder="Location" name="location" required
+        class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+
+    <!-- Date and Time -->
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Date</label>
+        <input type="date" name="date" required
+          class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Time</label>
+        <input type="time" name="time" required
+          class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+    </div>
+
+    <!-- Duration and Capacity -->
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Duration (hours)</label>
+        <input type="number" placeholder="e.g. 2" name="duration" required
+          class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Capacity</label>
+        <input type="number" placeholder="e.g. 50" name="capacity" required
+          class="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="flex justify-end">
+      <button type="submit" id="btn"
+        class="px-5 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        Submit
+      </button>
+    </div>
+    </form>
+
+
+
+
+    <!-- <form method="post" enctype="multipart/form-data">
         <input type="text" placeholder="name" name="name">
         <input type="file" placeholder="cover photo" name="cover_photo_file">
         <input type="text" placeholder="loc" name="location">
@@ -15,7 +80,7 @@
         <input type="number" placeholder="dur" name="duration">
         <input type="number" placeholder="capacity" name="capacity">
         <input type="submit" id="btn"></button>
-    </form>
+    </form> -->
 
     <!--
         name: str
